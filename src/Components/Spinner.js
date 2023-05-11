@@ -21,7 +21,7 @@ class Spinner extends React.Component {
   };
 
   // Define the height of each icon
-  static iconHeight = 188;
+  iconHeight = 188;
 
   // Generate a random speed multiplier between 1 and 3
   multiplier = Math.floor(Math.random() * (4 - 1) + 1);
@@ -30,11 +30,11 @@ class Spinner extends React.Component {
   start = this.setStartPosition();
 
   // Calculate the speed of the spinner based on the multiplier and icon height
-  speed = Spinner.iconHeight * this.multiplier;
+  speed = this.iconHeight * this.multiplier;
 
   // Calculate a random starting position for the spinner
   setStartPosition() {
-    return Math.floor(Math.random() * 9) * Spinner.iconHeight * -1;
+    return Math.floor(Math.random() * 9) * this.iconHeight * -1;
   }
 
   // Move the background of the spinner to create the spinning effect
@@ -47,15 +47,14 @@ class Spinner extends React.Component {
 
   // Get the symbol from the current position of the spinner
   getSymbolFromPosition() {
-    let { position } = this.state;
     const totalSymbols = 9;
-    const maxPosition = Spinner.iconHeight * (totalSymbols - 1) * -1;
+    const maxPosition = this.iconHeight * (totalSymbols - 1) * -1;
     let moved = (this.props.timer / 100) * this.multiplier;
     let startPosition = this.start;
     let currentPosition = startPosition;
 
     for (let i = 0; i < moved; i++) {
-      currentPosition -= Spinner.iconHeight;
+      currentPosition -= this.iconHeight;
 
       if (currentPosition < maxPosition) {
         currentPosition = 0;
@@ -110,7 +109,7 @@ class Spinner extends React.Component {
 
   // Render the spinner with its current position
   render() {
-    let { position, current } = this.state;
+    let { position } = this.state;
 
     return (
       <div
